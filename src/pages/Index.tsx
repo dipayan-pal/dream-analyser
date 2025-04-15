@@ -18,30 +18,30 @@ const Index = () => {
   };
 
   return (
-    <div className="min-h-screen flex flex-col items-center justify-center bg-gradient-to-b from-indigo-50 to-white p-4">
+    <div className="min-h-screen flex flex-col items-center justify-center dark:bg-gradient-to-b dark:from-[#1A1F2C] dark:to-[#221F26] bg-gradient-to-b from-indigo-50 to-white p-4">
       <div className="max-w-3xl w-full">
         <div className="mb-8 text-center">
           <div className="flex justify-center mb-4">
-            <Moon className="h-12 w-12 text-purple-600 mr-2" />
-            <Sparkles className="h-12 w-12 text-blue-500" />
+            <Moon className="h-12 w-12 dark:text-purple-300 text-purple-600 mr-2" />
+            <Sparkles className="h-12 w-12 dark:text-blue-300 text-blue-500" />
           </div>
-          <h1 className="text-4xl font-bold text-gray-800 mb-2">Dream Weaver Insight</h1>
-          <p className="text-lg text-gray-600">Share your dreams and discover hidden meanings</p>
+          <h1 className="text-4xl font-bold dark:text-white text-gray-800 mb-2">Dream Weaver Insight</h1>
+          <p className="text-lg dark:text-gray-300 text-gray-600">Share your dreams and discover hidden meanings</p>
         </div>
 
-        <Card className="shadow-lg border-purple-100">
+        <Card className="shadow-lg dark:bg-[#2C3E50] dark:border-gray-700 border-purple-100">
           <CardHeader>
-            <CardTitle className="text-2xl flex items-center">
+            <CardTitle className="text-2xl flex items-center dark:text-white">
               <span>Tell me about your dream</span>
             </CardTitle>
-            <CardDescription>
+            <CardDescription className="dark:text-gray-400">
               Describe your dream in as much detail as you can remember
             </CardDescription>
           </CardHeader>
           <CardContent>
             <Textarea 
               placeholder="Last night, I dreamt about..." 
-              className="min-h-[200px] text-base focus:border-purple-400"
+              className="min-h-[200px] text-base dark:bg-[#3A4750] dark:text-white dark:border-gray-600 dark:placeholder-gray-400 focus:border-purple-400"
               value={dream}
               onChange={(e) => setDream(e.target.value)}
             />
@@ -50,7 +50,7 @@ const Index = () => {
             <Button 
               onClick={handleAnalyze}
               disabled={dream.trim() === "" || isAnalyzing}
-              className="bg-gradient-to-r from-purple-600 to-blue-500 hover:from-purple-700 hover:to-blue-600 text-white py-6 px-8 rounded-lg font-medium text-lg min-w-[200px] transition-all duration-300 transform hover:scale-[1.03] flex items-center justify-center gap-2"
+              className="dark:bg-gradient-to-r dark:from-purple-800 dark:to-blue-800 bg-gradient-to-r from-purple-600 to-blue-500 hover:from-purple-700 hover:to-blue-600 dark:hover:from-purple-900 dark:hover:to-blue-900 text-white py-6 px-8 rounded-lg font-medium text-lg min-w-[200px] transition-all duration-300 transform hover:scale-[1.03] flex items-center justify-center gap-2"
             >
               {isAnalyzing ? (
                 <>
