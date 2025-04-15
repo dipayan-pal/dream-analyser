@@ -41,8 +41,7 @@ const Index = () => {
     } catch (error) {
       console.error("Error sending dream to webhook:", error);
       toast("Analysis failed", {
-        description: "There was a problem sending your dream for analysis. Please try again.",
-        variant: "destructive"
+        description: "There was a problem sending your dream for analysis. Please try again."
       });
     } finally {
       setIsAnalyzing(false);
