@@ -1,19 +1,55 @@
+
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { Brain, Moon, Sparkles } from "lucide-react";
+import { toast } from "sonner";
+
 const Index = () => {
   const [dream, setDream] = useState("");
   const [isAnalyzing, setIsAnalyzing] = useState(false);
-  const handleAnalyze = () => {
+
+  const handleAnalyze = async () => {
+    if (dream.trim() === "") {
+      toast("Please enter your dream first", {
+        description: "You need to describe your dream before we can analyze it."
+      });
+      return;
+    }
+    
     setIsAnalyzing(true);
-    // In a real implementation, this would call an API
-    setTimeout(() => {
+    
+    try {
+      const response = await fetch("https://dipayanpal.app.n8n.cloud/webhook-test/7a3a3f46-8f9c-4bee-9d3a-19a935f7aa55", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ 
+          dream: dream,
+          timestamp: new Date().toISOString()
+        }),
+      });
+      
+      toast("Dream sent for analysis", {
+        description: "Your dream has been submitted successfully."
+      });
+      
+      console.log("Webhook response:", response);
+      
+    } catch (error) {
+      console.error("Error sending dream to webhook:", error);
+      toast("Analysis failed", {
+        description: "There was a problem sending your dream for analysis. Please try again.",
+        variant: "destructive"
+      });
+    } finally {
       setIsAnalyzing(false);
-    }, 2000);
+    }
   };
-  return <div className="min-h-screen flex flex-col items-center justify-center bg-gradient-to-b from-indigo-50 to-white p-4 bg-slate-800">
+
+  return <div className="min-h-screen flex flex-col items-center justify-center bg-gradient-to-b from-indigo-50 to-white p-4">
       <div className="max-w-3xl w-full">
         <div className="mb-8 text-center">
           <div className="flex justify-center mb-4">
@@ -51,4 +87,5 @@ const Index = () => {
       </div>
     </div>;
 };
+
 export default Index;
