@@ -6,6 +6,11 @@ import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle }
 import { Brain, Moon, Sparkles } from "lucide-react";
 import { toast } from "sonner";
 
+interface DreamAnalysisResponse {
+  text: string;
+  [key: string]: any; // To handle any other fields
+}
+
 const Index = () => {
   const [dream, setDream] = useState("");
   const [isAnalyzing, setIsAnalyzing] = useState(false);
@@ -38,8 +43,9 @@ const Index = () => {
         throw new Error(`HTTP error! status: ${response.status}`);
       }
       
-      const data = await response.json();
-      setAnalysisResult(JSON.stringify(data, null, 2));
+      const data = await response.json() as DreamAnalysisResponse;
+      // Extract only the text field from the response
+      setAnalysisResult(data.text || "No analysis text was provided.");
       
       toast("Dream analysis complete", {
         description: "Your dream has been successfully analyzed!"
@@ -113,9 +119,9 @@ const Index = () => {
             </CardHeader>
             <CardContent>
               <div className="bg-gray-900/70 p-4 rounded-md border border-gray-700">
-                <pre className="text-green-400 whitespace-pre-wrap overflow-auto max-h-[400px] text-sm">
+                <div className="text-gray-200 whitespace-pre-wrap overflow-auto max-h-[400px] text-base leading-relaxed">
                   {analysisResult}
-                </pre>
+                </div>
               </div>
             </CardContent>
           </Card>
