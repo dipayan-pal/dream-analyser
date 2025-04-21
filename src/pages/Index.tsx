@@ -28,7 +28,7 @@ const Index = () => {
     setAnalysisResult(null);
     
     try {
-      const response = await fetch("https://dipayanpal.app.n8n.cloud/webhook/7a3a3f46-8f9c-4bee-9d3a-19a935f7aa55", {
+      const response = await fetch("https://dipayan-pal.app.n8n.cloud/webhook/7a3a3f46-8f9c-4bee-9d3a-19a935f7aa55", {
         method: "POST",
         headers: {
           "Content-Type": "application/json"
@@ -131,3 +131,4 @@ const Index = () => {
 };
 
 export default Index;
+
